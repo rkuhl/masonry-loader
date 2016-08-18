@@ -1,0 +1,16 @@
+{
+  "name": "Rytm.org",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~1.0.1",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-imagemin": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-svgmin": "^3.1.0",
+    "grunt-sync": "^0.5.1",
+    "load-grunt-tasks": "~3.5.0"
+  }
+}

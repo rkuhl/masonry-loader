@@ -1,0 +1,25 @@
+{
+  "name": "rytmproject",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Rytm Interactive"
+  ],
+  "license": "Rytm",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/vendors",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.3",
+    "bootstrap-sass": "~3.3.6",
+    "masonry": "^4.1.1"
+  }
+}
