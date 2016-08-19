@@ -14,4 +14,5 @@ Usage:
   <div class="masonry-item">...</div>
   ...
 </div>
+<script src='scripts/masonry-loader.js' type='text/javascript'></script>
 ```  

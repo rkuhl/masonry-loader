@@ -1,9 +1,9 @@
 $ ->
   CONSOLE_LOG_ON = true
   DEFAULT_OPTIONS = {
-    selector:  '.masonry-item'
+    selector:  '.masonry-item',
+    width:  '.masonry-item'
   }
-  
 
   trace = (str)->
     if CONSOLE_LOG_ON
@@ -19,26 +19,35 @@ $ ->
       val = DEFAULT_OPTIONS[key]
     val
 
-
+  # destroy masonry
   masonryDestroy = ($target)->
-    if $target.hasClass "js-masonry"
-      $target.masonry('destroy')
-      $target.removeClass "js-masonry"
+    if $target.hasClass "masonry-loader-on"
+      $target.masonry 'destroy'
+      $target.removeClass "masonry-loader-on"
 
+  # masonry layout
   masonryRefresh = ($target)->
-    trace "masonry refresh"
-    # destroy masonry #
-    masonryDestroy $target
-    # item selector
-    selector = getMasonryOption $(@), "selector"
-    params = {columnWidth: selector, itemSelector: selector}
-    $list = $target.find params.itemSelector
-    if $list.length
-      $target.addClass "js-masonry"
-      $target.masonry(params)
+    $target.masonry 'layout'
 
   masonryLoaderInit = ()->
     $('.masonry-loader').each ()->
-      masonryRefresh $(@)
+      $grid = $(@)
+      # column width
+      width = getMasonryOption $(@), "width"
+      # item selector
+      selector = getMasonryOption $(@), "selector"
+      if typeof $grid.masonry == 'function'
+        # masory params
+        params = {columnWidth: width, itemSelector: selector}
+        $grid.addClass "masonry-loader-on"
+        $grid.masonry params
+        if typeof $grid.imagesLoaded == 'function'
+          $grid.imagesLoaded ()->
+            masonryRefresh $grid
+        else
+          trace "looks like imagesLoaded is not included :("
+      else
+        trace "looks like masonry is not included :("
+
   # init
   masonryLoaderInit()

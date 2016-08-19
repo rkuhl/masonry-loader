@@ -3,7 +3,8 @@
     var CONSOLE_LOG_ON, DEFAULT_OPTIONS, getMasonryOption, masonryDestroy, masonryLoaderInit, masonryRefresh, trace;
     CONSOLE_LOG_ON = true;
     DEFAULT_OPTIONS = {
-      selector: '.masonry-item'
+      selector: '.masonry-item',
+      width: '.masonry-item'
     };
     trace = function(str) {
       if (CONSOLE_LOG_ON) {
@@ -22,29 +23,37 @@
       return val;
     };
     masonryDestroy = function($target) {
-      if ($target.hasClass("js-masonry")) {
+      if ($target.hasClass("masonry-loader-on")) {
         $target.masonry('destroy');
-        return $target.removeClass("js-masonry");
+        return $target.removeClass("masonry-loader-on");
       }
     };
     masonryRefresh = function($target) {
-      var $list, params, selector;
-      trace("masonry refresh");
-      masonryDestroy($target);
-      selector = getMasonryOption($(this), "selector");
-      params = {
-        columnWidth: selector,
-        itemSelector: selector
-      };
-      $list = $target.find(params.itemSelector);
-      if ($list.length) {
-        $target.addClass("js-masonry");
-        return $target.masonry(params);
-      }
+      return $target.masonry('layout');
     };
     masonryLoaderInit = function() {
       return $('.masonry-loader').each(function() {
-        return masonryRefresh($(this));
+        var $grid, params, selector, width;
+        $grid = $(this);
+        width = getMasonryOption($(this), "width");
+        selector = getMasonryOption($(this), "selector");
+        if (typeof $grid.masonry === 'function') {
+          params = {
+            columnWidth: width,
+            itemSelector: selector
+          };
+          $grid.addClass("masonry-loader-on");
+          $grid.masonry(params);
+          if (typeof $grid.imagesLoaded === 'function') {
+            return $grid.imagesLoaded(function() {
+              return masonryRefresh($grid);
+            });
+          } else {
+            return trace("looks like imagesLoaded is not included :(");
+          }
+        } else {
+          return trace("looks like masonry is not included :(");
+        }
       });
     };
     return masonryLoaderInit();

@@ -47,7 +47,8 @@ module.exports = function(grunt) {
 					'public/scripts/vendors.min.js': [
 						'src/vendors/jquery/dist/jquery.js',
 						'src/vendors/bootstrap-sass/assets/javascripts/bootstrap.js',
-						'src/vendors/masonry/dist/masonry.pkgd.js'
+						'src/vendors/masonry/dist/masonry.pkgd.js',
+						'src/vendors/imagesloaded/imagesloaded.pkgd.js'
 					]
 				}
 			}
