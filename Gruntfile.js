@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 					'src/scripts/common/libs/*.js',
 					'src/scripts/common/*.js'
 				],
-				dest: 'src/scripts/app.js',
+				dest: 'src/scripts/masonry-loader.js',
 			}
 		},
 		// ### Minify ###
